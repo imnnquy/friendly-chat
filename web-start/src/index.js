@@ -109,6 +109,7 @@ function loadMessages() {
   // Create the query to load the last 12 messages and listen for new ones.
   const recentMessagesQuery = query(collection(getFirestore(), 'messages'), orderBy('timestamp', 'desc'), limit(12));
   
+  console.log("loading messages...");
   // Start listening to the query.
   onSnapshot(recentMessagesQuery, function(snapshot) {
     snapshot.docChanges().forEach(function(change) {
@@ -368,7 +369,12 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
     div.querySelector('.pic').style.backgroundImage =
       'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
   }
-
+  console.log("This name is ", name);
+  console.log("This is the logged in user", getAuth().currentUser.displayName);
+  if (name == getAuth().currentUser.displayName) {
+    
+    div.setAttribute('style', 'align-self: end;');
+  }
   div.querySelector('.name').textContent = name;
   var messageElement = div.querySelector('.message');
 
