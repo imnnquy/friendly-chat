@@ -22,6 +22,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  FacebookAuthProvider,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -48,9 +49,15 @@ import { getPerformance } from 'firebase/performance';
 import { getFirebaseConfig } from './firebase-config.js';
 
 // Signs-in Friendly Chat.
-async function signIn() {
+async function signInWithGoogle() {
   // Sign in Firebase using popup auth and Google as the identity provider.
   var provider = new GoogleAuthProvider();
+  await signInWithPopup(getAuth(), provider);
+}
+
+async function signInWithFacebook() {
+  // Sign in Firebase using popup auth and Facebook as the identity provider.
+  var provider = new FacebookAuthProvider();
   await signInWithPopup(getAuth(), provider);
 }
 
@@ -242,7 +249,7 @@ function authStateObserver(user) {
     signOutButtonElement.removeAttribute('hidden');
 
     // Hide sign-in button.
-    signInButtonElement.setAttribute('hidden', 'true');
+    signInWithGoogleButtonElement.setAttribute('hidden', 'true');
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
@@ -254,7 +261,7 @@ function authStateObserver(user) {
     signOutButtonElement.setAttribute('hidden', 'true');
 
     // Show sign-in button.
-    signInButtonElement.removeAttribute('hidden');
+    signInWithGoogleButtonElement.removeAttribute('hidden');
   }
 }
 
@@ -405,14 +412,16 @@ var imageFormElement = document.getElementById('image-form');
 var mediaCaptureElement = document.getElementById('mediaCapture');
 var userPicElement = document.getElementById('user-pic');
 var userNameElement = document.getElementById('user-name');
-var signInButtonElement = document.getElementById('sign-in');
+var signInWithGoogleButtonElement = document.getElementById('sign-in-with-google');
+var signInWithFacebookButtonElement = document.getElementById('sign-in-with-facebook');
 var signOutButtonElement = document.getElementById('sign-out');
 var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
 // Saves message on form submit.
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
 signOutButtonElement.addEventListener('click', signOutUser);
-signInButtonElement.addEventListener('click', signIn);
+signInWithGoogleButtonElement.addEventListener('click', signInWithGoogle);
+signInWithGoogleButtonElement.addEventListener('click', signInWithFacebook);
 
 // Toggle for the button.
 messageInputElement.addEventListener('keyup', toggleButton);
