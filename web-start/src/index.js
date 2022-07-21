@@ -421,7 +421,7 @@ var signInSnackbarElement = document.getElementById('must-signin-snackbar');
 messageFormElement.addEventListener('submit', onMessageFormSubmit);
 signOutButtonElement.addEventListener('click', signOutUser);
 signInWithGoogleButtonElement.addEventListener('click', signInWithGoogle);
-signInWithGoogleButtonElement.addEventListener('click', signInWithFacebook);
+signInWithFacebookButtonElement.addEventListener('click', signInWithFacebook);
 
 // Toggle for the button.
 messageInputElement.addEventListener('keyup', toggleButton);
