@@ -264,6 +264,7 @@ function authStateObserver(user) {
 
     // Show sign-in button.
     signInWithGoogleButtonElement.removeAttribute('hidden');
+    signInWithFacbookButtonElement.removeAttribute('hidden');
   }
 }
 
