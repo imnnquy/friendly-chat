@@ -232,6 +232,7 @@ function onMessageFormSubmit(e) {
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
+  console.log("auth state changes", user)
   if (user) {
     // User is signed in!
     // Get the signed-in user's profile pic and name.
@@ -250,6 +251,7 @@ function authStateObserver(user) {
 
     // Hide sign-in button.
     signInWithGoogleButtonElement.setAttribute('hidden', 'true');
+    signInWithFacebookButtonElement.setAttribute('hidden', 'true');
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
