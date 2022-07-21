@@ -369,10 +369,7 @@ function displayMessage(id, timestamp, name, text, picUrl, imageUrl) {
     div.querySelector('.pic').style.backgroundImage =
       'url(' + addSizeToGoogleProfilePic(picUrl) + ')';
   }
-  console.log("This name is ", name);
-  console.log("This is the logged in user", getAuth().currentUser.displayName);
-  if (name == getAuth().currentUser.displayName) {
-    
+  if (getAuth() != null && getAuth().currentUser != null && name == getUserName()) {
     div.setAttribute('style', 'align-self: end;');
   }
   div.querySelector('.name').textContent = name;
